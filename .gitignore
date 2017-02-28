@@ -1,0 +1,7 @@
+twitter4j-*
+
+*.png
+*.jpg
+*.jpeg
+
+TwitterBigDataAnalytics/out/
