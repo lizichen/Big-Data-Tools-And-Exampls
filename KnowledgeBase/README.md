@@ -122,6 +122,73 @@ The reduce task output is usually written back to the **local file system** as t
 #####What happens during the shuffle phase?
 The shuffle phase is where the Mappers **{Key, Value} pairs** outputs are **sorted by key** before being given to the Reducer.
 
+##Pig
+#####Is Pig Case Sensitive ?
+- Operators and Commands are **not** case-sensitive. 
+- Aliases and function names **are** case-sensitive.
+
+#####When we submit a Pig program, are there MapReduce jobs created?
+**Yes**, Underneath it all Pig generates and runs MapReduce programs
+
+#####Can a Pig program read input from HDFS?
+**Yes**, Pig launches jobs and interacts with HDFS from my workstation.
+
+#####Can a Pig program output data to HDFS?
+**Yes**, Pig launches jobs and interacts with HDFS from my workstation.
+
+#####How do we define a schema for a Pig table?
+A schema is **optional** in Pig. 
+
+#####LOAD
+Loads a bag with the data from some user-specified input(.csv, or .txt files).  
+```pig
+raw = LOAD 'excite.log' USING PigStorage('\t') AS (user, time, query); 
+```
+
+#####FILTER .. BY
+Loads the new bag with the values from the specified bag that follow the filter.
+```pig
+clean1 = FILTER raw BY org.apache.pig.tutorial.NonURLDetector(query); 
+```
+
+#####FOREACH .. GENERATE
+Runs through the contents on the specified bag and generates something to **new bag**.  
+```pig
+clean2 = FOREACH clean1 GENERATE user, time, org.apache.pig.tutorial.ToLower(query) as query; 
+```
+
+#####DUMP
+Dump allows us to **view** the contents of a bag.
+```pig
+    DUMP clean2;
+```
+
+#####STORE
+Allows us to **store** the contents of a bag to a **file**.  
+```pig
+STORE ordered_uniq_frequency INTO '/tmp/tutorial-results' USING PigStorage(); 
+```
+
+#####JOIN
+Joins two or more relations.
+
+#####Group
+Groups the data in a single relation.
+
+#####ORDER .. BY
+Sorts a relation by one or more fields.
+
+#####DISTINCT
+Removes duplicate rows from a relation
+
+#####LIMIT
+Limits the size of the relation to a maximum number of tuples.
+
+#####UNION
+Combines two or more relations into one
+
+#####DESCRIBE
+Prints a relations schema
 
 
 
