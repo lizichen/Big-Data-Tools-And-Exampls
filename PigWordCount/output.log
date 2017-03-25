@@ -1,0 +1,29 @@
+2017-03-25 14:22:02,125 [main] WARN  org.apache.pig.tools.pigstats.PigStatsUtil - Failed to get RunningJob for job job_local402909182_0008
+2017-03-25 14:22:02,125 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - 100% complete
+2017-03-25 14:22:02,125 [main] INFO  org.apache.pig.tools.pigstats.SimplePigStats - Detected Local mode. Stats reported below may be incomplete
+2017-03-25 14:22:02,125 [main] INFO  org.apache.pig.tools.pigstats.SimplePigStats - Script Statistics: 
+
+HadoopVersion	PigVersion	UserId	StartedAt	FinishedAt	Features
+2.6.0-cdh5.8.0	0.12.0-cdh5.8.0	cloudera	2017-03-25 14:22:00	2017-03-25 14:22:02	HASH_JOIN,GROUP_BY
+
+Success!
+
+Job Stats (time in seconds):
+JobId	Alias	Feature	Outputs
+job_local1680527588_0007	WordCount,finalinput,keys,lines,lowercasekeys,match	HASH_JOIN	
+job_local402909182_0008	FinalCount,GroupWordCounts	GROUP_BY,COMBINER	file:///home/cloudera/workspace/PigWordCount/output,
+
+Input(s):
+Successfully read records from: "file:///home/cloudera/workspace/PigWordCount/keys.txt"
+Successfully read records from: "file:///home/cloudera/workspace/PigWordCount/input.txt"
+
+Output(s):
+Successfully stored records in: "file:///home/cloudera/workspace/PigWordCount/output"
+
+Job DAG:
+job_local1680527588_0007	->	job_local402909182_0008,
+job_local402909182_0008
+
+
+2017-03-25 14:22:02,126 [main] INFO  org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.MapReduceLauncher - Success!
+
