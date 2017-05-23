@@ -16,6 +16,10 @@ As the **size** of the problem becomes a part of the problem that we are trying 
 ##### What problems does it solve?
 It solves problems where the **size of the data** itself is part of the problem. It gives the ability to process **massive amounts of data**, possibly even at real-time. It helps with business analytics where a clients’ decision yesterday could be used to influence a decision tomorrow. It also helps with the storage of massive petabytes of information across multiple “blocks” or “Data Warehouses” and for seamless access to this data. It also helps in *reducing the* **cost** *of storing and processing Big Data*.
 
+##### Limitations of Hadoop?
+- **Hadoop** can perform **only batch processing**, and data will be accessed only in a **sequential** manner. That means one has to search the entire dataset even for the simplest of jobs.
+- A huge dataset when processed results in **another huge data set**, which should also be processed sequentially. At this point, a new solution is needed to access any point of data in a single unit of time (random access).
+
 ## HDFS (Hadoop Distributed File System)
 ##### What is HDFS?
 Hadoop Distributed File System (HDFS) is the **storage** part of Hadoop. It is a *file system* designed to store very large files.  
@@ -42,16 +46,19 @@ Hadoop Distributed File System (HDFS) is the **storage** part of Hadoop. It is a
 ##### What does the Namenode do? How many are there in a cluster?
 Namenode, It is the **Master Node**. There is usually just one for each cluster. Manages the **file system namespace** and its **tree**. *Maintains the metadata* for all the files and directories on the tree. Stores the **File Names, Permissions and the Data Location of each block of each file**. This is stored on the **main memory** for fast data access. NameNode helps **rectify** hardware failures.
 
-##### What does the Datanode do? How many are there in a cluster?
+##### What does the DataNode do? How many are there in a cluster?
 DataNode(s), are the **workers nodes**. There are multiple per cluster. They **serve the requests from the Master node**. They can **store** and **retrieve** blocks on demand. *They report to the NameNode(MasterNode) with the list of the blocks that they are storing*. They Compute **CheckSums** and report any error to the NameNode(MasterNode).
 
 ##### What is the advantage of using HDFS in a Hadoop cluster instead of using networked storage?
-- HDFS can use the power of **multiple machines** while NFS is restricted to 1. 
+- HDFS can use the power of **multiple machines** while NFS(Network File System) is restricted to 1. 
 - The **Size of the file system** is quickly extensible in HDFS whereas it is fixed for NFS.
 - HDFS offers **inbuilt reliability** whereas NFS does not
 - Both have clients contending for service but in HDFS **the load is distributed across multiple servers**. 
 - Clients need **not copy data** before processing it in HDFS
 - HDFS supports **very large file** sizes
+
+
+
 
 ## MapReduce
 ##### What is MapReduce?
@@ -122,6 +129,40 @@ The reduce task output is usually written back to the **local file system** as t
 ##### What happens during the shuffle phase?
 The shuffle phase is where the Mappers **{Key, Value} pairs** outputs are **sorted by key** before being given to the Reducer.
 
+
+
+
+## HBase  
+- **HBase** is a data model that is similar to **Google’s Big Table** designed to provide quick random access to huge amounts of structured data. 
+- HBase is a **column-oriented database**.
+- In HBase, tables are split into **regions** and are served by the **region servers**. Regions are vertically divided by column families into “Stores”. Stores are saved as files in HDFS.
+- HBase has three major components: **the client library, a master server, and region servers**. Region servers can be added or removed as per requirement.
+    * Master Server:
+        - Assigns regions to the region servers and takes the help from Apache ZooKeeper for this task.
+        - Handles load balancing of the regions across region servers. It unloads the busy servers and shifts the regions to less occupied servers.
+        - Maintains the state of the cluster by negotiating the load balancing.
+        - Is responsible for schema changes and other metadata operations such as creation of tables and column families.
+    * Regions: 
+        - Regions are nothing but tables that are split up and spread across the region servers.
+    * The **Region Servers** have regions that:
+        - Communicate with the client and handle data-related operations.
+        - Handle read and write requests for all the regions under it.
+        - Decide the size of the region by following the region size thresholds.
+- HBase Put data command: ``` put ’<table name>’,’row1’,’<colfamily:colname>’,’<value>’ ```
+
+##### HBase vs HDFS 
+- HDFS is a distributed file system suitable for storing large files.   
+- **HBase** is a database built on top of the HDFS.
+- HDFS does not support fast individual record lookups.     
+- **HBase** provides **fast lookups** for larger tables.
+- HDFS provides high latency batch processing; no concept of batch processing.
+- **HBase** provides **low latency access** to single rows from billions of records (Random access).
+- HDFS provides only sequential access of data. 
+- **HBase** internally uses **Hash tables** and provides random access, and it stores the data in **indexed HDFS files** for **faster lookups**.
+
+
+
+
 ## Pig
 ##### Is Pig Case Sensitive ?
 - Operators and Commands are **not** case-sensitive. 
@@ -139,9 +180,40 @@ The shuffle phase is where the Mappers **{Key, Value} pairs** outputs are **sort
 ##### How do we define a schema for a Pig table?
 A schema is **optional** in Pig. 
 
+## Hive
+- Hive is a data warehouse infrastructure tool to process **structured data** in Hadoop. It resides on top of Hadoop to summarize Big Data, and makes querying and analyzing easy.
+
+##### metastore:
+It is a relational database storing the metadata of hive tables, partitions, Hive databases etc
 
 
 
+
+## Zookeeper
+- Zookeeper is an open-source project that provides services like maintaining configuration information, naming, providing distributed synchronization, etc.
+- Zookeeper has ephemeral nodes representing different region servers. **Master servers** use these nodes to discover available servers.
+- In addition to availability, the nodes are also used to track server failures or network partitions.
+- Clients communicate with region servers via zookeeper.
+- In pseudo and standalone modes, **HBase** itself will take care of zookeeper.
+
+## Sqoop
+Use --split-by to select a splitting column of your own choosing  
+A subset of columns can be selected using: --columns  
+
+## Spark
+
+
+## Oozie
+
+
+## Scrum
+
+
+##### Flume vs Sqoop:
+- Flume helps to collect data from a variety of sources, like logs, jms, Directory etc. 
+- Multiple flume agents can be configured to collect high volume of data.
+- It scales horizontally.
+- Sqoop helps to move data between hadoop and other databases and it can transfer data in parallel for performance.
 
 
 
