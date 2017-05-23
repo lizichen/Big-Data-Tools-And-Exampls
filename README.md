@@ -1,4 +1,6 @@
-# Realtime-Big-Data-Analytics
+# Big Data Tools and Examples
+
+#### MapReduce, HDFS, Hadoop, Hive, Pig, Spark, HBase, Sqoop, Oozie
 
 #### Using git push on CentOS
 - git remote set-url origin https://lizichen@github.com/lizichen/Realtime-Big-Data-Analytics.git
