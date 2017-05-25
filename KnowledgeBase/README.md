@@ -215,5 +215,16 @@ A subset of columns can be selected using: --columns
 - It scales horizontally.
 - Sqoop helps to move data between hadoop and other databases and it can transfer data in parallel for performance.
 
+## Knowledge and Framework Graphs:
+### 1. Hadoop Ecosystem:
+![Alt text](./What-is-Hadoop-Ecosystem.png?raw=true "What-is-Hadoop-Ecosystem.png")
+![Alt text](./HadoopKnowledgeGraph.png?raw=true "HadoopKnowledgeGraph.png")
+
+### 2. Spark Tools:
+![Alt text](./spark-graph.png?raw=true "spark-graph.png")
+
+### 3. Hadoop vs Spark:
+![Alt text](./hadoopvsspark.png?raw=true "hadoopvsspark.png")
+
 
 
