@@ -1,0 +1,62 @@
+1)
+val mydata = sc.textFile("/user/lc3397/class3_hw/frostroad.txt")
+
+2) 3)
+scala> mydata.count()
+res4: Long = 23   
+
+4)
+scala> mydata.collect()
+res5: Array[String] = Array(Two roads diverged in a yellow wood,, And sorry I could not travel both, And be one traveler, long I stood, And looked down one as far as I could, To where it bent in the undergrowth;, "", Then took the other, as just as fair,, And having perhaps the better claim,, Because it was grassy and wanted wear;, Though as for that the passing there, Had worn them really about the same,, "", And both that morning equally lay, In leaves no step had trodden black., Oh, I kept the first for another day!, Yet knowing how way leads on to way,, I doubted if I should ever come back., "", I shall be telling this with a sigh, Somewhere ages and ages hence:, Two roads diverged in a wood, and I--, I took the one less traveled by,, And that has made all the difference.)
+
+5)
+[lc3397@login-1-1 ~]$ hdfs dfs -mkdir loudacre
+[lc3397@login-1-1 ~]$ hdfs dfs -mkdir loudacre/weblog
+
+6)
+[lc3397@login-1-1 ~]$ hdfs dfs -put 2014-03-15.log loudacre/weblog
+
+7)
+hdfs dfs -cat loudacre/weblog/2014-03-15.log
+
+8) 9) 10) 
+val logfile = sc.textFile("/user/lc3397/loudacre/weblog/2014-03-15.log")
+
+scala> logfile.take(10)
+res13: Array[String] = Array(234.206.18.239 - 8495 [15/Mar/2014:23:59:30 +0100] "GET /KBDOC-00082.html HTTP/1.0" 200 9054 "http://www.loudacre.com"  "Loudacre Mobile Browser Titanic 2200", 234.206.18.239 - 8495 [15/Mar/2014:23:59:30 +0100] "GET /theme.css HTTP/1.0" 200 4552 "http://www.loudacre.com"  "Loudacre Mobile Browser Titanic 2200", 104.213.2.248 - 22676 [15/Mar/2014:23:58:52 +0100] "GET /KBDOC-00086.html HTTP/1.0" 200 11413 "http://www.loudacre.com"  "Loudacre Mobile Browser Ronin Novelty Note 1", 104.213.2.248 - 22676 [15/Mar/2014:23:58:52 +0100] "GET /theme.css HTTP/1.0" 200 14482 "http://www.loudacre.com"  "Loudacre Mobile Browser Ronin Novelty Note 1", 151.200.170.131 - 126729 [15/Mar/2014:23:58:21 +0100] "GET /KBDOC-00165.html HTTP/1.0" 200 9353 "http://www.loudacre.com"  "...
+
+11)
+scala> val pattern = ".jpg|.jpeg|.JPG|.JPEG".r
+pattern: scala.util.matching.Regex = .jpg|.jpeg|.JPG|.JPEG
+
+scala> val jpg_data_rdd = logfile.filter(line => pattern.findFirstIn(line).isDefined)
+jpg_data_rdd: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[13] at filter at <console>:31
+
+scala> jpg_data_rdd.first
+res19: String = 64.190.73.51 - 74328 [15/Mar/2014:23:49:14 +0100] "GET /titanic_2400.jpg HTTP/1.0" 200 6021 "http://www.loudacre.com"  "Loudacre Mobile Browser iFruit 5"
+
+scala> jpg_data_rdd.count()
+res20: Long = 423
+
+12)
+scala> jpg_data_rdd.take(10).foreach(println)
+64.190.73.51 - 74328 [15/Mar/2014:23:49:14 +0100] "GET /titanic_2400.jpg HTTP/1.0" 200 6021 "http://www.loudacre.com"  "Loudacre Mobile Browser iFruit 5"
+25.101.226.55 - 72619 [15/Mar/2014:23:32:32 +0100] "GET /ifruit_2.jpg HTTP/1.0" 200 18225 "http://www.loudacre.com"  "Loudacre Mobile Browser Sorrento F01L"
+34.5.4.77 - 72680 [15/Mar/2014:23:25:12 +0100] "GET /titanic_2100.jpg HTTP/1.0" 200 8290 "http://www.loudacre.com"  "Loudacre Mobile Browser Titanic 2400"
+132.121.213.6 - 56748 [15/Mar/2014:23:17:31 +0100] "GET /titanic_2200.jpg HTTP/1.0" 200 18336 "http://www.loudacre.com"  "Loudacre Mobile Browser MeeToo 4.1"
+189.66.139.249 - 74708 [15/Mar/2014:23:14:46 +0100] "GET /titanic_2300.jpg HTTP/1.0" 200 6123 "http://www.loudacre.com"  "Loudacre Mobile Browser Sorrento F41L"
+70.144.191.215 - 64461 [15/Mar/2014:23:13:53 +0100] "GET /ronin_s3.jpg HTTP/1.0" 200 13245 "http://www.loudacre.com"  "Loudacre Mobile Browser Ronin Novelty Note 1"
+118.29.231.137 - 101207 [15/Mar/2014:23:13:00 +0100] "GET /sorrento_f23l.jpg HTTP/1.0" 200 7108 "http://www.loudacre.com"  "Loudacre Mobile Browser Sorrento F30L"
+36.3.20.255 - 90691 [15/Mar/2014:23:11:03 +0100] "GET /meetoo_4.0.jpg HTTP/1.0" 200 16484 "http://www.loudacre.com"  "Loudacre Mobile Browser Sorrento F24L"
+122.8.98.155 - 32325 [15/Mar/2014:23:08:09 +0100] "GET /ifruit_2.jpg HTTP/1.0" 200 6817 "http://www.loudacre.com"  "Loudacre Mobile Browser Titanic 2400"
+108.101.156.204 - 121872 [15/Mar/2014:22:50:45 +0100] "GET /meetoo_1.0.jpg HTTP/1.0" 200 16090 "http://www.loudacre.com"  "Loudacre Mobile Browser Sorrento F33L"
+
+13)
+scala> jpg_data_rdd.count()
+res24: Long = 423
+
+14)
+13)
+scala> jpg_data_rdd.count()
+res24: Long = 423
+
