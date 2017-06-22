@@ -1,0 +1,32 @@
+hdfs dfs -mkdir class4_hw
+hdfs dfs -put devicestatus.txt class4_hw
+
+val sourceData = sc.textFile("/user/lc3397/class4_hw/devicestatus.txt")
+
+val splitted_data = sourceData.map(s => s.split(s.charAt(19)))
+
+val valid_lines = splitted_data.filter(s => s.length == 14)
+
+val five_useful_values = valid_lines.map(s => Array(s(0), s(1), s(2), s(12), s(13)))
+
+val model_only_useful_values = five_useful_values.map(s => Array(s(0), s(1).split(" ")(1), s(2), s(3), s(4)))
+
+val comma_delimited_lines = model_only_useful_values.map(s => s(0)+","+s(1)+","+s(2)+","+s(3)+","+s(4))
+
+comma_delimited_lines.saveAsTextFile("loudacre/devstatus/devicestatus_etl")
+
+
+
+hdfs dfs -ls loudacre/devstatus/devicestatus_etl
+hdfs dfs -cat loudacre/devstatus/devicestatus_etl/part-00000
+hdfs dfs -cat loudacre/devstatus/devicestatus_etl/part-00001
+
+
+Some results:
+....
+2014-03-15:10:29:55,1,f4fe10c8-07e5-4eaa-bc37-760086ec2731,33.6780751575,-111.346660134
+2014-03-15:10:29:55,1.0,dafe4706-e0dd-4da5-8c8a-2486ef68761e,37.8158835208,-121.447245741
+2014-03-15:10:29:55,1100,91f9dd16-0ba0-4cc4-8365-5a05dfcf8821,37.8415316233,-122.122884963
+2014-03-15:10:29:55,2000,7a83c2c8-02e3-49c7-b87a-30d9aeef8a34,37.8512123294,-122.203328818
+2014-03-15:10:29:55,F41L,a6aa3822-21cd-46c9-b029-f9ce9a750140,37.3151790408,-121.767891693
+
