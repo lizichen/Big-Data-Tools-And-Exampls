@@ -22,6 +22,7 @@
 - Tuple to String
 - Partition Function in a string
 - Tuple2
--   
+- Map Collection
+- Scala Operators
 
 
