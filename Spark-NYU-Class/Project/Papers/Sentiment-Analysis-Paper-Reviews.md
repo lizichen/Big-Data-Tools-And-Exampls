@@ -30,3 +30,14 @@ This paper studies the relation between the **numerical information** found in f
 This paper compares and combines the existing methods to sentiment analysis in Financial news, evaluating them using the above questions. 
 
 The paper concludes that methods from machine learning are very effective at distinguishing between positive and negative news. However, algorithms trained on Financial news are not useful for predicting sentiment in **movie reviews**. It also concludes that the methods from machine learning outperform the methods proposed by the Finance community when predicting future stock returns. **These predictions suggest strategies that generate positive returns when trading with public information, but these returns vanish after accounting for trading costs.**
+
+### 4. Walking Down Wall Street With A Tablet: A Survey Of Stock Market Predictions Using The Web - Michela Nardo
+
+### 5. Tweets and Trades: the Information Content of Stock Microblogs - Timm O. Sprenger
+
+### 6. The Effects of Twitter Sentiment on Stock Price Returns - Gabriele Ranco
+
+**Conclusions from 5 and 6**: there is a correlation between the “social feeling” for a particular stock and the evolution of financial markets, but not causality. In other words, **Twitter** is not a crystal ball that can predict markets, but rather a mirror reflecting the current situation.
+
+
+
