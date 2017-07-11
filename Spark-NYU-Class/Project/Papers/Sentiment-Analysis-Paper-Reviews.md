@@ -39,5 +39,11 @@ The paper concludes that methods from machine learning are very effective at dis
 
 **Conclusions from 5 and 6**: there is a correlation between the “social feeling” for a particular stock and the evolution of financial markets, but not causality. In other words, **Twitter** is not a crystal ball that can predict markets, but rather a mirror reflecting the current situation.
 
+### 7. Sentiment Analysis of Financial News Articles - Robert P. Schumaker
+
+### 8. STOCK TREND PREDICTION USING NEWS SENTIMENT ANALYSIS - Kalyani Joshi
+
+
+
 
 
