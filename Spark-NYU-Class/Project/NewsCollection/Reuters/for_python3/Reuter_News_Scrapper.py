@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 
-# coding: utf-8
-
-# In[1]:
-
-=======
->>>>>>> 3d6d80187ee5703ef6f3c12e97adcf96f2541dd0
 from bs4 import BeautifulSoup
 import urllib
 import csv
@@ -13,12 +6,6 @@ import re
 from datetime import datetime, timedelta
 import time
 
-
-<<<<<<< HEAD
-# In[2]:
-
-=======
->>>>>>> 3d6d80187ee5703ef6f3c12e97adcf96f2541dd0
 def getNewsContent(htmlstring):
     r = urllib.urlopen(htmlstring).read()
     soup = BeautifulSoup(r)
@@ -35,11 +22,8 @@ def getNewsContent(htmlstring):
     return date, header, article
 
 
-<<<<<<< HEAD
 # In[3]:
 
-=======
->>>>>>> 3d6d80187ee5703ef6f3c12e97adcf96f2541dd0
 def getUrlsFromArchiveByDate(date):
     archivePageByDate = "http://www.reuters.com/resources/archive/us/"+date+".html"
     page = urllib.urlopen(archivePageByDate).read()
@@ -51,11 +35,7 @@ def getUrlsFromArchiveByDate(date):
 
     for i in range(len(moduleBody)):
         url = moduleBody[i].a["href"]
-<<<<<<< HEAD
         if ("/news/picture/" in url) or ("/news/video/" in url) or ("/pictures-report" in url) or ("/article/life-" in url):
-=======
-        if ("/news/picture/" in url) or ("/news/video/" in url) or ("article/pictures-report" in url):
->>>>>>> 3d6d80187ee5703ef6f3c12e97adcf96f2541dd0
             continue
         else:
             url_list.append(url)
@@ -63,11 +43,8 @@ def getUrlsFromArchiveByDate(date):
     return url_list
 
 
-<<<<<<< HEAD
 # In[4]:
 
-=======
->>>>>>> 3d6d80187ee5703ef6f3c12e97adcf96f2541dd0
 def convertTimestamp(time_str):
     time_str = "JULY 12, 2017 / 1:18 PM / 10 HOURS AGO"
     time_arr = time_str.split(" / ")
@@ -79,7 +56,6 @@ def convertTimestamp(time_str):
     return str(adjusted_EST_time)
 
 
-<<<<<<< HEAD
 # In[41]:
 
 def getCsvFileByDate(date):
@@ -121,44 +97,3 @@ for date in dates:
 
 
 
-=======
-def getCsvFileByDate(date):
-    urls = getUrlsFromArchiveByDate(date)
-    count = 0
-    with open(date+".json", "wb") as csv_file:
-        csv_file.write('[\n')
-        for url in urls:
-            try_count = 0
-            while True:
-                try:
-                    time_web, title, article = getNewsContent(url)
-                    adjusted_time = convertTimestamp(time_web)
-
-                    adjusted_time = "\"news_time\":\"" + adjusted_time + "\""
-                    title = "\"news_title\":\"" + title.replace('\"',' ').encode("utf-8") + "\""
-		            article = "\"content\":\"" + article.encode("utf-8").replace('\n',' ').replace('\r',' ').replace('\t',' ').replace('\"',' ') + "\""
-                    line = '{' + adjusted_time + ',' + title + ',' + article + '}'
-
-                    csv_file.write(line)
-                    csv_file.write('\n')
-                    count += 1
-                    print("Finished "+str(count)+" - "+url)
-                    break
-                except:
-                    print("Something wrong happened! try_count = "+str(try_count))
-                    if try_count <= 4:
-                        time.sleep(10)
-                        try_count += 1
-                    else:
-                        print("URL Does Not Work! "+url)
-                        break
-    csv_file.write(']')
-    csv_file.close()
-    print(count)
-
-dates = ["20170712", "20170711", "20170710","20170709","20170708","20170707","20170706","20170705","20170704","20170703","20170702","20170701"]
-
-for date in dates:
-    getCsvFileByDate(date)
-
->>>>>>> 3d6d80187ee5703ef6f3c12e97adcf96f2541dd0
