@@ -202,6 +202,9 @@ A subset of columns can be selected using: --columns
 
 ## Spark
 
+Solution to *Failed to bin SparkUI* error:
+spark-shell --conf "spark.ui.port=10101"
+
 
 ## Oozie
 
