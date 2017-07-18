@@ -15,3 +15,31 @@
 
 
 ## Recurrent Model for Past Stock Price Trend.
+
+
+#### Resource:
+- https://newsapi.org/sources:
+	- General
+		- BBC News
+		- ABC News
+		- CNN
+		- Google News
+		- Independent
+		- New York Magazine
+		- The New York Times
+		- Reuters
+		- Time
+	- Finance
+		- Business Insider
+		- CNBC
+		- The Economist
+		- Fortune
+	- Bloomberg
+		- Financial Times
+		- The Wall Street Journal
+	- Tech
+		- Ars Technica
+		- Engadget
+		- Hacker News
+		- Recode
+		- TechCrunch
